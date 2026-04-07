@@ -32,7 +32,7 @@ st.markdown(
 
     /* Professional Softer Background */
     .stApp {
-        background: linear-gradient(135deg, #1a2a33, #243b46);
+        background: linear-gradient(135deg, #0FC8DB, #B5F1F7);
         background-attachment: fixed;
     }
 
