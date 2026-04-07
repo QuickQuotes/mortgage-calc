@@ -23,7 +23,7 @@ st.markdown(
 
     /* 2. SOFTER GRADIENT BACKGROUND (Reduced contrast for better readability) */
     .stApp {
-        background: linear-gradient(135deg, #F0F8FF, #243b46);
+        background: linear-gradient(135deg, #49C6D6, #95C2C7);
         background-attachment: fixed;
     }
 
