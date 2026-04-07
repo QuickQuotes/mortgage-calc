@@ -80,7 +80,7 @@ def get_gspread_client():
 st.title("🛡️ Personal Risk Protection Analyzer")
 
 with st.expander("📊 Quick Estimate", expanded=True):
-    m_pay = st.number_input("Monthly Mortgage ($)", value=3000)
+    m_pay = st.number_input("Monthly Mortgage ($)", value=5000)
     a_inc = st.number_input("Annual Income ($)", value=100000)
     rec_benefit = max(m_pay * 1.15, (a_inc * 0.45) / 12)
     st.info(f"Recommended Monthly Benefit: ${rec_benefit:,.2f}")
