@@ -9,26 +9,29 @@ st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
 st.markdown(
     """
     <style>
-   /* 1. BRANDING & USERNAME KILLER */
+   /* 1. THE MASTER HIDER: DELETES THE ENTIRE CORNER */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
     .stAppToolbar {display: none !important;}
 
-    /* This targets the specific 'aamanchand1-afk' badge and the bottom-right corner */
+    /* This deletes the entire container that holds the name and the badge */
     [data-testid="stStatusWidget"],
-    [aria-label*="aamanchand1-afk"],
-    a[href*="aamanchand1-afk"],
-    div[class*="viewerBadge"],
-    .st-emotion-cache-1vt458s, 
-    .st-emotion-cache-kg9bc0 {
+    .st-emotion-cache-1vt458s,
+    .st-emotion-cache-kg9bc0,
+    .st-emotion-cache-1wbqy7s,
+    div[class*="viewerBadge"] {
         display: none !important;
         visibility: hidden !important;
-        width: 0 !important;
-        height: 0 !important;
-        opacity: 0 !important;
         pointer-events: none !important;
-        transform: scale(0) !important;
+        opacity: 0 !important;
+        width: 0px !important;
+        height: 0px !important;
+    }
+
+    /* Target any link containing your username specifically as a backup */
+    a[href*="aamanchand1-afk"] {
+        display: none !important;
     }
 
     /* BACKGROUND & TEXT COLORS */
