@@ -28,9 +28,11 @@ st.markdown(
         background-attachment: fixed;
     }
 
-    /* 3. TEXT: Everything in BLACK */
+   /* 3. TEXT: Everything in BLACK with NO highlight */
     .stMarkdown, label, p, .stAlert, .stSelectbox label, .stMultiSelect label, div[data-testid="stExpander"] p {
         color: #000000 !important;
+        background-color: transparent !important; /* This removes the highlight */
+        padding: 0px !important;                 /* This keeps it tight to the background */
     }
 
     /* 4. TITLE: One line, Black, positioned at the top */
