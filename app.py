@@ -76,7 +76,7 @@ with st.form("lead_form", clear_on_submit=True):
     st.text_input("Phone", key="phone")
     st.number_input("Age", value=30, key="age")
     st.selectbox("Current Cover", ["No existing cover", "Partial", "Fully covered"], key="status")
-    st.multiselect("Interests", ["Life", "Income Protection", "Trauma", "TPD", "Health"], key="types")
+    st.multiselect("Interests", ["Life", "Income Protection", "Trauma", "TPD", "Health", "Car", "Home", "Content"], key="types")
     st.text_area("Notes", key="notes")
     
     if st.form_submit_button("Submit to Lead Tracker"):
