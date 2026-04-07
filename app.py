@@ -36,7 +36,7 @@ with st.form("lead_form", clear_on_submit=True):
     phone = st.text_input("Phone")
     age = st.number_input("Age", value=30)
     status = st.selectbox("Current Cover", ["No existing cover", "Partial", "Fully covered"])
-    types = st.multiselect("Interests", ["Life", "Income Protection", "Trauma", "TPD", "Health"])
+    types = st.multiselect("Interests", ["Life", "Income Protection", "Trauma", "TPD", "Health", "Car", "Home", "Content", "Pet"])
     notes = st.text_area("Notes for Aman")
     
     if st.form_submit_button("Submit to Lead Tracker"):
@@ -46,10 +46,11 @@ with st.form("lead_form", clear_on_submit=True):
                 # Replace the string below with your actual Sheet ID from the URL
                 sheet = client.open_by_key("1V0emFdEceVa3JB5uctCw5PMYC-li_YvbZZFQmQwj0vI").sheet1
                 
-                new_row = [name, email, phone, age, status, ", ".join(types), m_pay, a_inc, notes]
+                # This version matches your sheet columns: A(Name), B(Email), C(Phone), D(Age), E(Status), F(Cover), G(Sub), H(Mortgage), I(Income), J(Notes)
+new_row = [name, email, phone, age, status, ", ".join(types), "", m_pay, a_inc, notes]
                 sheet.append_row(new_row)
                 
-                st.success("✅ Lead saved! Aman will contact you shortly.")
+                st.success("✅ Lead saved! Advisor will contact you shortly.")
                 st.balloons()
             except Exception as e:
                 st.error(f"Error: {e}")
