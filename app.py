@@ -5,31 +5,34 @@ from google.oauth2.service_account import Credentials
 # 1. Page Config
 st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
 
-# --- PASTE THE NEW CODE STARTING HERE ---
+# 2. Modern Styling (Softer Background & UI Clean)
 st.markdown(
     """
     <style>
-    /* 1. Hide the Red 'Hosted with Streamlit' bar and the Avatar */
+    /* 1. HIDE ALL STREAMLIT BRANDING (Even the stubborn red bar) */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
     .stAppToolbar {display: none !important;}
     [data-testid="stStatusWidget"] {display: none !important;}
-    .viewerBadge_container__1QS13 {display: none !important;}
-    div[class^="viewerBadge"] {display: none !important;}
+    
+    /* This specifically targets the "Hosted with Streamlit" red bar */
+    .viewerBadge_container__1QS13, .viewerBadge_link__1QS13, div[class^="viewerBadge"] {
+        display: none !important;
+    }
 
-    /* 2. Professional Gradient Background */
+    /* 2. SOFTER GRADIENT BACKGROUND (Reduced contrast for better readability) */
     .stApp {
-        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        background: linear-gradient(135deg, #1a2a33, #243b46);
         background-attachment: fixed;
     }
 
-    /* 3. Force labels and text to White for visibility */
-    .stMarkdown, .stTitle, .stHeader, label, p, .stAlert, .stSelectbox label, .stMultiSelect label {
-        color: #ffffff !important;
+    /* 3. LIGHT GREY TEXT (Easier on the eyes than pure white) */
+    .stMarkdown, label, p, .stAlert, .stSelectbox label, .stMultiSelect label {
+        color: #e0e0e0 !important;
     }
 
-    /* 4. Single Line Title styling */
+    /* 4. SINGLE LINE TITLE (No wrap) */
     .title-text {
         white-space: nowrap;
         font-size: 2.1rem !important;
@@ -37,16 +40,16 @@ st.markdown(
         color: #ffffff;
         text-align: center;
         padding: 10px 0px;
-        margin-top: -50px;
+        margin-top: -40px;
     }
     </style>
     <h1 class="title-text">🛡️ Personal Risk Protection Analyzer</h1>
     """,
     unsafe_allow_html=True
 )
-# --- END OF NEW CODE ---
 
-# ... (the rest of your get_gspread_client function goes here)
+# IMPORTANT: Make sure there is NO line below this that says st.title(...)
+# If you see st.title("Personal Risk Protection Analyzer") further down, DELETE IT.
 
 # 1. Page Config
 st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
