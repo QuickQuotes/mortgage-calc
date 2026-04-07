@@ -5,7 +5,7 @@ from google.oauth2.service_account import Credentials
 # 1. Page Config
 st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
 
-# 2. Custom Color Styling (Teal Gradient + Black Text)
+# 2. Custom Color Styling (Teal Gradient + Pure Black Text)
 st.markdown(
     """
     <style>
@@ -18,15 +18,52 @@ st.markdown(
     div[class^="viewerBadge"], div[class*="viewerBadge"] {
         display: none !important;
         visibility: hidden !important;
-        height: 0 !important;
-        width: 0 !important;
     }
 
-    /* 2. YOUR SPECIFIC BACKGROUND COLORS */
+    /* 2. BACKGROUND: Using your chosen teal/grey-green colors */
     .stApp {
         background: linear-gradient(135deg, #49C6D6, #95C2C7);
         background-attachment: fixed;
     }
+
+    /* 3. THE HIGHLIGHT KILLER: Targets the wrappers around labels */
+    /* This removes the white background 'pill' from every text element */
+    div[data-testid="stWidgetLabel"], 
+    div[data-testid="stWidgetLabel"] div, 
+    div[data-testid="stWidgetLabel"] p,
+    .stMarkdown div, 
+    .stMarkdown p {
+        background-color: transparent !important;
+        background: none !important;
+        box-shadow: none !important;
+    }
+
+    /* 4. TEXT: Forces everything to Pure Black */
+    .stMarkdown, label, p, .stAlert, .stSelectbox label, .stMultiSelect label {
+        color: #000000 !important;
+        -webkit-text-fill-color: #000000 !important;
+    }
+
+    /* 5. SINGLE LINE TITLE */
+    .title-text {
+        white-space: nowrap;
+        font-size: 2.1rem !important;
+        font-weight: 700;
+        color: #000000;
+        text-align: center;
+        padding: 10px 0px;
+        margin-top: -40px;
+    }
+
+    /* 6. INPUT BOX CORNERS (Optional: makes them look sharper) */
+    .stTextInput div, .stNumberInput div, .stSelectbox div, .stMultiSelect div {
+        border-radius: 8px !important;
+    }
+    </style>
+    <h1 class="title-text">🛡️ Personal Risk Protection Analyzer</h1>
+    """,
+    unsafe_allow_html=True
+)
 
    /* 3. TEXT: This forces the text containers to be transparent */
     .stMarkdown, label, p, .stAlert, .stSelectbox label, .stMultiSelect label, div[data-testid="stExpander"] p {
