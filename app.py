@@ -9,9 +9,15 @@ st.set_page_config(page_title="Insurance Risk Lead Tracker", page_icon="🛡️"
 # 2. Secure Connection Logic (The Fixed Function)
 def get_gspread_client():
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    # This part handles the secret key correctly
+    
+    # This version handles "escaped" characters much better
     info = dict(st.secrets["gcp_service_account"])
-    info["private_key"] = info["private_key"].replace("\\n", "\n")
+    
+    # Clean the key: remove literal backslashes and fix newlines
+    raw_key = info["private_key"]
+    processed_key = raw_key.replace("\\n", "\n")
+    info["private_key"] = processed_key
+    
     creds = Credentials.from_service_account_info(info, scopes=scope)
     return gspread.authorize(creds)
 
