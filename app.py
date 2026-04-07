@@ -5,6 +5,52 @@ from google.oauth2.service_account import Credentials
 # 1. Page Config
 st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
 
+# --- PASTE THE NEW CODE STARTING HERE ---
+st.markdown(
+    """
+    <style>
+    /* 1. Hide the Red 'Hosted with Streamlit' bar and the Avatar */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    .stAppToolbar {display: none !important;}
+    [data-testid="stStatusWidget"] {display: none !important;}
+    .viewerBadge_container__1QS13 {display: none !important;}
+    div[class^="viewerBadge"] {display: none !important;}
+
+    /* 2. Professional Gradient Background */
+    .stApp {
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        background-attachment: fixed;
+    }
+
+    /* 3. Force labels and text to White for visibility */
+    .stMarkdown, .stTitle, .stHeader, label, p, .stAlert, .stSelectbox label, .stMultiSelect label {
+        color: #ffffff !important;
+    }
+
+    /* 4. Single Line Title styling */
+    .title-text {
+        white-space: nowrap;
+        font-size: 2.1rem !important;
+        font-weight: 700;
+        color: #ffffff;
+        text-align: center;
+        padding: 10px 0px;
+        margin-top: -50px;
+    }
+    </style>
+    <h1 class="title-text">🛡️ Personal Risk Protection Analyzer</h1>
+    """,
+    unsafe_allow_html=True
+)
+# --- END OF NEW CODE ---
+
+# ... (the rest of your get_gspread_client function goes here)
+
+# 1. Page Config
+st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
+
 # This code hides the Streamlit footer and the "Made with Streamlit" brand
 hide_st_style = """
             <style>
