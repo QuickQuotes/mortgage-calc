@@ -1,28 +1,23 @@
 import streamlit as st
 import gspread
 from google.oauth2.service_account import Credentials
-import pandas as pd
 
-# 1. Page Configuration
-st.set_page_config(page_title="Insurance Risk Lead Tracker", page_icon="🛡️")
+# 1. Page Config
+st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
 
-# 2. Secure Connection Logic (The Fixed Function)
 def get_gspread_client():
-    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    
-    # We create a copy of the secrets to modify safely
-    info = dict(st.secrets["gcp_service_account"])
-    
-    # This line is the "Magic Eraser"
-    # It removes any accidental backslashes that cause the 'MalformedFraming' error
-    info["private_key"] = info["private_key"].replace("\\n", "\n")
-    
-    creds = Credentials.from_service_account_info(info, scopes=scope)
-    return gspread.authorize(creds)
+    try:
+        scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+        info = dict(st.secrets["gcp_service_account"])
+        # Fix formatting for Google Library
+        info["private_key"] = info["private_key"].replace("\\n", "\n")
+        creds = Credentials.from_service_account_info(info, scopes=scope)
+        return gspread.authorize(creds)
+    except Exception as e:
+        st.error(f"Secret Loading Error: {e}")
+        return None
 
-# 3. The App UI
 st.title("🛡️ Personal Risk Protection Analyzer")
-st.write("Calculate your protection needs and request a specialist review.")
 
 with st.expander("📊 Quick Estimate", expanded=True):
     m_pay = st.number_input("Monthly Mortgage ($)", value=3000)
@@ -36,23 +31,25 @@ with st.form("lead_form", clear_on_submit=True):
     phone = st.text_input("Phone")
     age = st.number_input("Age", value=30)
     status = st.selectbox("Current Cover", ["No existing cover", "Partial", "Fully covered"])
-    types = st.multiselect("Interests", ["Life", "Income Protection", "Trauma", "TPD", "Health", "Car", "Home", "Content", "Pet"])
-    notes = st.text_area("Notes for Aman")
+    types = st.multiselect("Interests", ["Life", "Income Protection", "Trauma", "TPD", "Health"])
+    notes = st.text_area("Notes for Advisor")
     
     if st.form_submit_button("Submit to Lead Tracker"):
         if name and email:
-            try:
-                client = get_gspread_client()
-                # Replace the string below with your actual Sheet ID from the URL
-                sheet = client.open_by_key("1V0emFdEceVa3JB5uctCw5PMYC-li_YvbZZFQmQwj0vI").sheet1
-                
-                # This version matches your sheet columns: A(Name), B(Email), C(Phone), D(Age), E(Status), F(Cover), G(Sub), H(Mortgage), I(Income), J(Notes)
-new_row = [name, email, phone, age, status, ", ".join(types), "", m_pay, a_inc, notes]
-                sheet.append_row(new_row)
-                
-                st.success("✅ Lead saved! Advisor will contact you shortly.")
-                st.balloons()
-            except Exception as e:
-                st.error(f"Error: {e}")
+            client = get_gspread_client()
+            if client:
+                try:
+                    # Your Specific Sheet ID
+                    sheet = client.open_by_key("1V0emFdEceVa3JB5uctCw5PMYC-li_YvbZZFQmQwj0vI").sheet1
+                    
+                    # FIXED COLUMN ORDER:
+                    # A:Name, B:Email, C:Phone, D:Age, E:Status, F:Types, G:Spacer, H:Mortgage, I:Income, J:Notes
+                    new_row = [name, email, phone, age, status, ", ".join(types), "N/A", m_pay, a_inc, notes]
+                    
+                    sheet.append_row(new_row)
+                    st.success("✅ Lead saved! Advisor will contact you shortly.")
+                    st.balloons()
+                except Exception as e:
+                    st.error(f"Sheet Error: {e}")
         else:
             st.warning("Please enter name and email.")
