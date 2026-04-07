@@ -5,11 +5,11 @@ from google.oauth2.service_account import Credentials
 # 1. Page Config
 st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
 
-# 2. Custom Color Styling (Teal Gradient + Pure Black Text)
+# 2. All-in-One Styling (The fix for highlights and indentation)
 st.markdown(
     """
     <style>
-    /* 1. HIDER: Keeps the red bar and name invisible */
+    /* HIDE STREAMLIT BRANDING */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
@@ -20,79 +20,32 @@ st.markdown(
         visibility: hidden !important;
     }
 
-    /* 2. BACKGROUND: Using your chosen teal/grey-green colors */
+    /* BACKGROUND GRADIENT */
     .stApp {
         background: linear-gradient(135deg, #49C6D6, #95C2C7);
         background-attachment: fixed;
     }
 
-    /* 3. THE HIGHLIGHT KILLER: Targets the wrappers around labels */
-    /* This removes the white background 'pill' from every text element */
-    div[data-testid="stWidgetLabel"], 
+    /* THE HIGHLIGHT KILLER: This stops the white boxes around text */
     div[data-testid="stWidgetLabel"] div, 
     div[data-testid="stWidgetLabel"] p,
     .stMarkdown div, 
-    .stMarkdown p {
-        background-color: transparent !important;
-        background: none !important;
-        box-shadow: none !important;
-    }
-
-    /* 4. TEXT: Forces everything to Pure Black */
-    .stMarkdown, label, p, .stAlert, .stSelectbox label, .stMultiSelect label {
-        color: #000000 !important;
-        -webkit-text-fill-color: #000000 !important;
-    }
-
-    /* 5. SINGLE LINE TITLE */
-    .title-text {
-        white-space: nowrap;
-        font-size: 2.1rem !important;
-        font-weight: 700;
-        color: #000000;
-        text-align: center;
-        padding: 10px 0px;
-        margin-top: -40px;
-    }
-
-    /* 6. INPUT BOX CORNERS (Optional: makes them look sharper) */
-    .stTextInput div, .stNumberInput div, .stSelectbox div, .stMultiSelect div {
-        border-radius: 8px !important;
-    }
-    </style>
-    <h1 class="title-text">🛡️ Personal Risk Protection Analyzer</h1>
-    """,
-    unsafe_allow_html=True
-)
-
-   /* 3. TEXT: This forces the text containers to be transparent */
-    .stMarkdown, label, p, .stAlert, .stSelectbox label, .stMultiSelect label, div[data-testid="stExpander"] p {
-        color: #000000 !important;
-        background-color: transparent !important;
-        background: none !important;
-    }
-
-    /* THE FIX: Specifically targets the 'pill' background around labels */
-    div[data-testid="stWidgetLabel"] div, 
-    div[data-testid="stWidgetLabel"] p,
-    .st-emotion-cache-16idsys p {
+    .stMarkdown p,
+    label p,
+    span p {
         background-color: transparent !important;
         background: transparent !important;
         box-shadow: none !important;
         border: none !important;
     }
 
-    /* Ensures the text itself doesn't have a highlight shadow */
-    span {
-        background-color: transparent !important;
+    /* TEXT COLOR: Pure Black */
+    .stMarkdown, label, p, .stAlert, .stSelectbox label, .stMultiSelect label {
+        color: #000000 !important;
+        -webkit-text-fill-color: #000000 !important;
     }
 
-    /* This targets the specific wrapper Streamlit uses for Form Labels */
-    div[data-testid="stWidgetLabel"] p {
-        background-color: transparent !important;
-        color: #000000 !important;
-    }
-    /* 4. TITLE: One line, Black, positioned at the top */
+    /* SINGLE LINE TITLE */
     .title-text {
         white-space: nowrap;
         font-size: 2.1rem !important;
@@ -101,13 +54,6 @@ st.markdown(
         text-align: center;
         padding: 10px 0px;
         margin-top: -40px;
-    }
-
-    /* 5. FORM BOXES: Optional - making input boxes slightly transparent 
-       to look better with the teal background */
-    .stTextInput input, .stNumberInput input, .stSelectbox div, .stMultiSelect div {
-        background-color: rgba(255, 255, 255, 0.9) !important;
-        color: black !important;
     }
     </style>
     <h1 class="title-text">🛡️ Personal Risk Protection Analyzer</h1>
@@ -122,12 +68,10 @@ def get_gspread_client():
         info["private_key"] = info["private_key"].replace("\\n", "\n")
         creds = Credentials.from_service_account_info(info, scopes=scope)
         return gspread.authorize(creds)
-    except Exception as e:
+    except Exception:
         return None
 
 # --- APP CONTENT ---
-# (Note: I removed the st.title() line from here to prevent the double title)
-
 with st.expander("📊 Quick Estimate", expanded=True):
     m_pay = st.number_input("Monthly Mortgage ($)", value=3000)
     a_inc = st.number_input("Annual Income ($)", value=100000)
@@ -148,10 +92,11 @@ with st.form("lead_form", clear_on_submit=True):
             client = get_gspread_client()
             if client:
                 try:
+                    # Your Sheet ID
                     sheet = client.open_by_key("1V0emFdEceVa3JB5uctCw5PMYC-li_YvbZZFQmQwj0vI").sheet1
                     new_row = [name, email, phone, age, status, ", ".join(types), "N/A", m_pay, a_inc, notes]
                     sheet.append_row(new_row)
-                    st.success("✅ Lead saved! Aman will contact you shortly.")
+                    st.success("✅ Lead saved!")
                     st.balloons()
                 except Exception as e:
                     st.error(f"Sheet Error: {e}")
