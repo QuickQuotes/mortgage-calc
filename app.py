@@ -8,6 +8,16 @@ st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
 # 2. Modern Styling (Softer Background & UI Clean)
 st.markdown(
     """
+    /* NEW: Hides 'Created by' and 'Hosted' bar */
+    .viewerBadge_container__1QS13, 
+    .viewerBadge_link__1QS13, 
+    div[class^="viewerBadge"],
+    div[class*="viewerBadge"] {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+    }
     <style>
     /* 1. HIDE ALL STREAMLIT BRANDING (Even the stubborn red bar) */
     #MainMenu {visibility: hidden;}
