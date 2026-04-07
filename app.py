@@ -5,51 +5,50 @@ from google.oauth2.service_account import Credentials
 # 1. Page Config
 st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
 
-# 2. All-in-One Invisible Styling & Header
+# 2. Custom Color Styling (Teal Gradient + Black Text)
 st.markdown(
     """
     <style>
-    /* THE NUCLEAR HIDER: Targets the red bar and name badge */
+    /* 1. HIDER: Keeps the red bar and name invisible */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
     .stAppToolbar {display: none !important;}
     [data-testid="stStatusWidget"] {display: none !important;}
-    
-    /* This targets the specific 'Created by' container */
-    .viewerBadge_container__1QS13, 
-    .viewerBadge_link__1QS13, 
-    div[class^="viewerBadge"], 
-    div[class*="viewerBadge"],
-    div[id*="viewerBadge"] {
+    div[class^="viewerBadge"], div[class*="viewerBadge"] {
         display: none !important;
         visibility: hidden !important;
         height: 0 !important;
         width: 0 !important;
-        opacity: 0 !important;
-        pointer-events: none !important;
     }
 
-    /* Professional Softer Background */
+    /* 2. YOUR SPECIFIC BACKGROUND COLORS */
     .stApp {
-        background: linear-gradient(135deg, #0FC8DB, #B5F1F7);
+        background: linear-gradient(135deg, #49C6D6, #95C2C7);
         background-attachment: fixed;
     }
 
-    /* Light Grey Text for better contrast */
-    .stMarkdown, label, p, .stAlert, .stSelectbox label, .stMultiSelect label {
-        color: #e0e0e0 !important;
+    /* 3. TEXT: Everything in BLACK */
+    .stMarkdown, label, p, .stAlert, .stSelectbox label, .stMultiSelect label, div[data-testid="stExpander"] p {
+        color: #000000 !important;
     }
 
-    /* Single Line Title styling */
+    /* 4. TITLE: One line, Black, positioned at the top */
     .title-text {
         white-space: nowrap;
         font-size: 2.1rem !important;
         font-weight: 700;
-        color: #ffffff;
+        color: #000000;
         text-align: center;
         padding: 10px 0px;
         margin-top: -40px;
+    }
+
+    /* 5. FORM BOXES: Optional - making input boxes slightly transparent 
+       to look better with the teal background */
+    .stTextInput input, .stNumberInput input, .stSelectbox div, .stMultiSelect div {
+        background-color: rgba(255, 255, 255, 0.9) !important;
+        color: black !important;
     }
     </style>
     <h1 class="title-text">🛡️ Personal Risk Protection Analyzer</h1>
