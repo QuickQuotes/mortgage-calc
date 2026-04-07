@@ -9,15 +9,23 @@ st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
 st.markdown(
     """
     <style>
-    /* HIDE STREAMLIT BRANDING */
+   /* 1. HIDE ALL BRANDING AND USERNAME AVATAR */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
     .stAppToolbar {display: none !important;}
     [data-testid="stStatusWidget"] {display: none !important;}
-    div[class^="viewerBadge"], div[class*="viewerBadge"] {
+    
+    /* Targets the username, avatar, and 'Hosted' bar in the bottom right */
+    div[class^="viewerBadge"], 
+    div[class*="viewerBadge"],
+    .st-emotion-cache-1vt458s,
+    #viewer-badge-container {
         display: none !important;
         visibility: hidden !important;
+        width: 0 !important;
+        height: 0 !important;
+        opacity: 0 !important;
     }
 
     /* BACKGROUND GRADIENT */
