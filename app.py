@@ -9,7 +9,7 @@ st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
 st.markdown(
     """
     <style>
-   /* 1. THE MASTER HIDER: DELETES THE ENTIRE CORNER */
+  /* 1. THE MASTER HIDER: DELETES THE ENTIRE CORNER */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
@@ -29,6 +29,11 @@ st.markdown(
         height: 0px !important;
     }
 
+    /* Target any link containing your username specifically as a backup */
+    a[href*="aamanchand1-afk"] {
+        display: none !important;
+    }
+    
     /* Target any link containing your username specifically as a backup */
     a[href*="aamanchand1-afk"] {
         display: none !important;
