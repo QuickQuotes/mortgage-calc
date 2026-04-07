@@ -9,23 +9,23 @@ st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
 st.markdown(
     """
     <style>
-   /* 1. HIDE ALL BRANDING AND USERNAME AVATAR */
+   /* 1. UNIVERSAL HIDER (Targets all branding and the 'Created by' badge) */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
     .stAppToolbar {display: none !important;}
-    [data-testid="stStatusWidget"] {display: none !important;}
     
-    /* Targets the username, avatar, and 'Hosted' bar in the bottom right */
-    div[class^="viewerBadge"], 
-    div[class*="viewerBadge"],
-    .st-emotion-cache-1vt458s,
-    #viewer-badge-container {
+    /* This targets the container by its dynamic class and any ID containing 'badge' */
+    div[class*="viewerBadge"], 
+    div[id*="badge"],
+    div[class*="StatusWidget"],
+    [data-testid="stStatusWidget"],
+    .st-emotion-cache-1vt458s {
         display: none !important;
         visibility: hidden !important;
-        width: 0 !important;
-        height: 0 !important;
-        opacity: 0 !important;
+        height: 0px !important;
+        width: 0px !important;
+        overflow: hidden !important;
     }
 
     /* BACKGROUND GRADIENT */
