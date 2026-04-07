@@ -8,43 +8,35 @@ st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
 # 2. All-in-One Styling (The fix for highlights and indentation)
 st.markdown(
     """
-
-    /* --- NAME HIDER (KEEPS ICON) --- */
-    /* Hides the 'Created by Aman' text specifically */
-    div[data-testid="stStatusWidget"] div:last-child,
-    .viewerBadge_link__1QS13 span, 
-    div[class*="viewerBadge"] span,
-    #viewer-badge-content {
-        display: none !important;
-        visibility: hidden !important;
-    }
-
-    /* Shrinks the box so only the red icon remains */
-    div[data-testid="stStatusWidget"],
-    div[class*="viewerBadge"] {
-        max-width: 35px !important;
-        overflow: hidden !important;
-        border-radius: 50% !important;
-    }
     
     <style>
-   /* 1. UNIVERSAL HIDER (Targets all branding and the 'Created by' badge) */
+  /* 1. BRANDING & USERNAME KILLER */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
     .stAppToolbar {display: none !important;}
-    
-    /* This targets the container by its dynamic class and any ID containing 'badge' */
-    div[class*="viewerBadge"], 
-    div[id*="badge"],
-    div[class*="StatusWidget"],
-    [data-testid="stStatusWidget"],
-    .st-emotion-cache-1vt458s {
+
+    /* TARGETS THE SPECIFIC USERNAME 'aamanchand1-afk' */
+    a[href*="aamanchand1-afk"], 
+    div[class*="aamanchand1-afk"],
+    span[class*="aamanchand1-afk"],
+    div[id*="aamanchand1-afk"],
+    [data-testid="stStatusWidget"] div:nth-child(2) {
         display: none !important;
         visibility: hidden !important;
-        height: 0px !important;
-        width: 0px !important;
+        width: 0 !important;
+        height: 0 !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+
+    /* THE CLIP: Chops the badge to just the red icon */
+    [data-testid="stStatusWidget"] {
+        max-width: 32px !important;
+        min-width: 32px !important;
         overflow: hidden !important;
+        border-radius: 50% !important;
+        background-color: transparent !important;
     }
 
     /* BACKGROUND GRADIENT */
