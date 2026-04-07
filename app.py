@@ -5,62 +5,45 @@ from google.oauth2.service_account import Credentials
 # 1. Page Config
 st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
 
-# 2. ALL STYLING (Wrapped correctly so there is no error at top)
+# 2. THE SUPER-HIDER STYLING
 st.markdown(
     """
     <style>
-  /* 1. THE ABSOLUTE HIDER - TARGETS EVERYTHING IN THE CORNER */
+    /* HIDES MAIN MENU AND FOOTER */
     #MainMenu, footer, header {visibility: hidden !important;}
     .stAppToolbar {display: none !important;}
 
-    /* This targets the specific container by its 'cache' position */
+    /* PUSHES THE USERNAME BADGE OFF THE ENTIRE UNIVERSE */
     [data-testid="stStatusWidget"],
     .st-emotion-cache-1vt458s,
     .st-emotion-cache-kg9bc0,
     .st-emotion-cache-1wbqy7s,
     div[class*="viewerBadge"],
-    div[id*="badge"] {
+    a[href*="aamanchand1-afk"] {
+        position: fixed !important;
+        left: -10000vw !important;
+        bottom: -10000vh !important;
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
-        height: 0px !important;
-        width: 0px !important;
-        pointer-events: none !important;
     }
 
-    /* SPECIFICALLY KILLS THE LINK WITH YOUR NAME */
-    a[href*="aamanchand1-afk"] {
-        display: none !important;
-        height: 0 !important;
-        width: 0 !important;
-    }
-
-    /* BACKGROUND & TEXT COLORS */
+    /* BACKGROUND COLOR & TEXT FIXES */
     .stApp {
         background: linear-gradient(135deg, #49C6D6, #95C2C7);
         background-attachment: fixed;
     }
 
-    /* KILL WHITE HIGHLIGHTS AROUND LABELS */
-    div[data-testid="stWidgetLabel"] div, 
-    div[data-testid="stWidgetLabel"] p,
-    .stMarkdown div, 
-    .stMarkdown p,
-    label, p, span {
+    div[data-testid="stWidgetLabel"] p, label, p, span {
         background-color: transparent !important;
-        background: transparent !important;
-        box-shadow: none !important;
         color: #000000 !important;
     }
 
-    /* TITLE STYLING */
     .title-text {
-        white-space: nowrap;
         font-size: 2.1rem !important;
         font-weight: 700;
         color: #000000;
         text-align: center;
-        padding: 10px 0px;
         margin-top: -40px;
     }
     </style>
@@ -69,6 +52,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# 3. GOOGLE SHEETS LOGIC
 def get_gspread_client():
     try:
         scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
@@ -79,7 +63,7 @@ def get_gspread_client():
     except Exception:
         return None
 
-# --- APP CONTENT ---
+# 4. APP CONTENT
 with st.expander("📊 Quick Estimate", expanded=True):
     m_pay = st.number_input("Monthly Mortgage ($)", value=3000)
     a_inc = st.number_input("Annual Income ($)", value=100000)
@@ -96,5 +80,4 @@ with st.form("lead_form", clear_on_submit=True):
     st.text_area("Notes", key="notes")
     
     if st.form_submit_button("Submit to Lead Tracker"):
-        # Logic for GSpread submission goes here
         st.success("✅ Lead saved!")
