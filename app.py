@@ -9,20 +9,26 @@ st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
 st.markdown(
     """
     <style>
-    /* HIDE BRANDING & USERNAME 'aamanchand1-afk' */
+   /* 1. BRANDING & USERNAME KILLER */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
     .stAppToolbar {display: none !important;}
 
-    /* Targets the badge and your specific name */
-    [data-testid="stStatusWidget"], 
-    div[class*="viewerBadge"], 
-    a[href*="aamanchand1-afk"] {
+    /* This targets the specific 'aamanchand1-afk' badge and the bottom-right corner */
+    [data-testid="stStatusWidget"],
+    [aria-label*="aamanchand1-afk"],
+    a[href*="aamanchand1-afk"],
+    div[class*="viewerBadge"],
+    .st-emotion-cache-1vt458s, 
+    .st-emotion-cache-kg9bc0 {
         display: none !important;
         visibility: hidden !important;
         width: 0 !important;
         height: 0 !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transform: scale(0) !important;
     }
 
     /* BACKGROUND & TEXT COLORS */
