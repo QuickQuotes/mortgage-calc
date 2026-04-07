@@ -8,10 +8,15 @@ st.set_page_config(page_title="Insurance Risk Lead Tracker", page_icon="🛡️"
 st.title("🛡️ Personal Risk Protection Analyzer")
 
 # 2. Secure Connection Logic
-def get_gspread_client():
-    # When deployed, we put the 'secrets' in Streamlit's dashboard
+    def get_gspread_client():
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    creds = Credentials.from_service_account_info(st.secrets["gcp_service_account"], scopes=scope)
+    
+    # This part is the "Magic Fix" for the PEM error
+    # It tells the app to handle the secret key correctly
+    info = dict(st.secrets["gcp_service_account"])
+    info["private_key"] = info["private_key"].replace("\\n", "\n")
+    
+    creds = Credentials.from_service_account_info(info, scopes=scope)
     return gspread.authorize(creds)
 
 # 3. The App UI
@@ -26,7 +31,7 @@ with st.form("lead_form", clear_on_submit=True):
     phone = st.text_input("Phone")
     age = st.number_input("Age", value=30)
     status = st.selectbox("Current Cover", ["No existing cover", "Partial", "Fully covered"])
-    types = st.multiselect("Interests", ["Life", "Income Protection", "Trauma", "TPD", "Health"])
+    types = st.multiselect("Interests", ["Life", "Income Protection", "Trauma", "TPD", "Health" "Car", "Home", "Content", "Other"])
     notes = st.text_area("Notes for Aman")
     
     if st.form_submit_button("Submit to Lead Tracker"):
