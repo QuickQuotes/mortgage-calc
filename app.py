@@ -9,34 +9,30 @@ st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
 st.markdown(
     """
     <style>
-  /* 1. THE MASTER HIDER: DELETES THE ENTIRE CORNER */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
+  /* 1. THE ABSOLUTE HIDER - TARGETS EVERYTHING IN THE CORNER */
+    #MainMenu, footer, header {visibility: hidden !important;}
     .stAppToolbar {display: none !important;}
 
-    /* This deletes the entire container that holds the name and the badge */
+    /* This targets the specific container by its 'cache' position */
     [data-testid="stStatusWidget"],
     .st-emotion-cache-1vt458s,
     .st-emotion-cache-kg9bc0,
     .st-emotion-cache-1wbqy7s,
-    div[class*="viewerBadge"] {
+    div[class*="viewerBadge"],
+    div[id*="badge"] {
         display: none !important;
         visibility: hidden !important;
-        pointer-events: none !important;
         opacity: 0 !important;
-        width: 0px !important;
         height: 0px !important;
+        width: 0px !important;
+        pointer-events: none !important;
     }
 
-    /* Target any link containing your username specifically as a backup */
+    /* SPECIFICALLY KILLS THE LINK WITH YOUR NAME */
     a[href*="aamanchand1-afk"] {
         display: none !important;
-    }
-    
-    /* Target any link containing your username specifically as a backup */
-    a[href*="aamanchand1-afk"] {
-        display: none !important;
+        height: 0 !important;
+        width: 0 !important;
     }
 
     /* BACKGROUND & TEXT COLORS */
