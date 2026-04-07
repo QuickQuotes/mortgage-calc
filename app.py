@@ -10,13 +10,12 @@ st.set_page_config(page_title="Insurance Risk Lead Tracker", page_icon="🛡️"
 def get_gspread_client():
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
     
-    # This version handles "escaped" characters much better
+    # We create a copy of the secrets to modify safely
     info = dict(st.secrets["gcp_service_account"])
     
-    # Clean the key: remove literal backslashes and fix newlines
-    raw_key = info["private_key"]
-    processed_key = raw_key.replace("\\n", "\n")
-    info["private_key"] = processed_key
+    # This line is the "Magic Eraser"
+    # It removes any accidental backslashes that cause the 'MalformedFraming' error
+    info["private_key"] = info["private_key"].replace("\\n", "\n")
     
     creds = Credentials.from_service_account_info(info, scopes=scope)
     return gspread.authorize(creds)
