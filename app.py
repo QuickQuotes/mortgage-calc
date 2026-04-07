@@ -8,6 +8,25 @@ st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
 # 2. All-in-One Styling (The fix for highlights and indentation)
 st.markdown(
     """
+
+    /* --- NAME HIDER (KEEPS ICON) --- */
+    /* Hides the 'Created by Aman' text specifically */
+    div[data-testid="stStatusWidget"] div:last-child,
+    .viewerBadge_link__1QS13 span, 
+    div[class*="viewerBadge"] span,
+    #viewer-badge-content {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    /* Shrinks the box so only the red icon remains */
+    div[data-testid="stStatusWidget"],
+    div[class*="viewerBadge"] {
+        max-width: 35px !important;
+        overflow: hidden !important;
+        border-radius: 50% !important;
+    }
+    
     <style>
    /* 1. UNIVERSAL HIDER (Targets all branding and the 'Created by' badge) */
     #MainMenu {visibility: hidden;}
