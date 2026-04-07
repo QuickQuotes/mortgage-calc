@@ -5,44 +5,33 @@ from google.oauth2.service_account import Credentials
 # 1. Page Config
 st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
 
-# 2. Modern Styling (Softer Background & UI Clean)
+# 2. All Styling & Invisible Rules
 st.markdown(
     """
-    /* NEW: Hides 'Created by' and 'Hosted' bar */
-    .viewerBadge_container__1QS13, 
-    .viewerBadge_link__1QS13, 
-    div[class^="viewerBadge"],
-    div[class*="viewerBadge"] {
-        display: none !important;
-        visibility: hidden !important;
-        height: 0 !important;
-        width: 0 !important;
-    }
     <style>
-    /* 1. HIDE ALL STREAMLIT BRANDING (Even the stubborn red bar) */
+    /* 1. This part is INVISIBLE - It hides the red bar and name */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
     .stAppToolbar {display: none !important;}
     [data-testid="stStatusWidget"] {display: none !important;}
-    
-    /* This specifically targets the "Hosted with Streamlit" red bar */
-    .viewerBadge_container__1QS13, .viewerBadge_link__1QS13, div[class^="viewerBadge"] {
+    div[class^="viewerBadge"], div[class*="viewerBadge"] {
         display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
     }
 
-    /* 2. SOFTER GRADIENT BACKGROUND (Reduced contrast for better readability) */
+    /* 2. Background and Text Colors */
     .stApp {
         background: linear-gradient(135deg, #49C6D6, #95C2C7);
         background-attachment: fixed;
     }
-
-    /* 3. LIGHT GREY TEXT (Easier on the eyes than pure white) */
     .stMarkdown, label, p, .stAlert, .stSelectbox label, .stMultiSelect label {
         color: #e0e0e0 !important;
     }
 
-    /* 4. SINGLE LINE TITLE (No wrap) */
+    /* 3. Single Line Title */
     .title-text {
         white-space: nowrap;
         font-size: 2.1rem !important;
