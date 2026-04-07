@@ -28,13 +28,20 @@ st.markdown(
         background-attachment: fixed;
     }
 
-   /* 3. TEXT: Everything in BLACK with NO highlight */
+   /* 3. TEXT: This deep-cleans the label backgrounds */
     .stMarkdown, label, p, .stAlert, .stSelectbox label, .stMultiSelect label, div[data-testid="stExpander"] p {
         color: #000000 !important;
-        background-color: transparent !important; /* This removes the highlight */
-        padding: 0px !important;                 /* This keeps it tight to the background */
+        background-color: rgba(0,0,0,0) !important; /* Forces transparency */
+        background: none !important;                /* Removes any image/gradient background */
+        border: none !important;                    /* Removes any slight borders */
+        box-shadow: none !important;                /* Removes any glow/shadow */
     }
 
+    /* This targets the specific wrapper Streamlit uses for Form Labels */
+    div[data-testid="stWidgetLabel"] p {
+        background-color: transparent !important;
+        color: #000000 !important;
+    }
     /* 4. TITLE: One line, Black, positioned at the top */
     .title-text {
         white-space: nowrap;
