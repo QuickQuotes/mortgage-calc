@@ -5,6 +5,17 @@ from google.oauth2.service_account import Credentials
 # 1. Page Config
 st.set_page_config(page_title="Insurance Lead Tracker", page_icon="🛡️")
 
+# This code hides the Streamlit footer and the "Made with Streamlit" brand
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            .stAppToolbar {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
 def get_gspread_client():
     try:
         scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
