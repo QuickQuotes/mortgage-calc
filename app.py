@@ -28,13 +28,26 @@ st.markdown(
         background-attachment: fixed;
     }
 
-   /* 3. TEXT: This deep-cleans the label backgrounds */
+   /* 3. TEXT: This forces the text containers to be transparent */
     .stMarkdown, label, p, .stAlert, .stSelectbox label, .stMultiSelect label, div[data-testid="stExpander"] p {
         color: #000000 !important;
-        background-color: rgba(0,0,0,0) !important; /* Forces transparency */
-        background: none !important;                /* Removes any image/gradient background */
-        border: none !important;                    /* Removes any slight borders */
-        box-shadow: none !important;                /* Removes any glow/shadow */
+        background-color: transparent !important;
+        background: none !important;
+    }
+
+    /* THE FIX: Specifically targets the 'pill' background around labels */
+    div[data-testid="stWidgetLabel"] div, 
+    div[data-testid="stWidgetLabel"] p,
+    .st-emotion-cache-16idsys p {
+        background-color: transparent !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+
+    /* Ensures the text itself doesn't have a highlight shadow */
+    span {
+        background-color: transparent !important;
     }
 
     /* This targets the specific wrapper Streamlit uses for Form Labels */
